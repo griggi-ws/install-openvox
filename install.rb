@@ -15,7 +15,7 @@ File.write('install.sh', <<-SH)
 #!/usr/bin/env bash
 
 beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
- 
+
 function usage()
 {
    cat << HEREDOC
@@ -26,7 +26,7 @@ function usage()
      -h, --help                   show this help message and exit
      -v, --version VERSION        install a specific puppet-agent version
      -c, --collection COLLECTION  install a specific puppet-agent collection (e.g. puppet7)
-     -n, --noop                   do a dry run, do not change any files 
+     -n, --noop                   do a dry run, do not change any files
      --cleanup                    remove the puppetlabs repository after installation finishes
 
 HEREDOC
@@ -39,6 +39,8 @@ while [[ "$#" -gt 0 ]]; do
            PT_collection="puppet6"
          elif beginswith "7." "$PT_version"; then
            PT_collection="puppet7"
+         elif beginswith "8." "$PT_version"; then
+           PT_collection="puppet8"
          else
            PT_collection="puppet"
          fi ;;
