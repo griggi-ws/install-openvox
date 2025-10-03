@@ -67,8 +67,8 @@ success() {
 }
 
 determine_command_for_facter_4() {
-  #openvox_version="$(openvox --version)"
-  facts_command=(openvox facts show --show-legacy --render-as json)
+  #openvox_version="$(puppet --version)"
+  facts_command=(puppet facts show --show-legacy --render-as json)
 }
 
 maybe_delegate_to_facter() {
@@ -380,8 +380,8 @@ fi
 # Track to handle openvox5 to openvox6
 if [ -f /opt/puppetlabs/puppet/VERSION ]; then
   installed_version=`cat /opt/puppetlabs/puppet/VERSION`
-elif type -p openvox >/dev/null; then
-  installed_version=`openvox --version`
+elif type -p puppet >/dev/null; then
+  installed_version=`puppet --version`
 else
   installed_version=uninstalled
 fi
@@ -1008,7 +1008,7 @@ if [[ $PT__noop != true ]]; then
   install_file $filetype "$download_filename"
 
   if [[ $PT_stop_service = true ]]; then
-    /opt/puppetlabs/bin/openvox resource service openvox ensure=stopped enable=false
+    /opt/puppetlabs/bin/puppet resource service puppet ensure=stopped enable=false
   fi
 
   #Cleanup
